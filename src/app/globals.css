@@ -269,27 +269,27 @@
   }
 
   .btn-pill-primary {
-    background-color: var(--rui-color-dark);
-    color: var(--rui-color-white);
+    background-color: var(--foreground);
+    color: var(--background);
   }
   .btn-pill-primary:hover { opacity: 0.85; }
 
   .btn-pill-secondary {
-    background-color: var(--rui-color-light-surface);
-    color: var(--rui-color-dark);
+    background-color: var(--secondary);
+    color: var(--secondary-foreground);
     padding: 14px 34px;
   }
   .btn-pill-secondary:hover { opacity: 0.85; }
 
   .btn-pill-outline {
     background-color: transparent;
-    color: var(--rui-color-dark);
-    border: 2px solid var(--rui-color-dark);
+    color: var(--foreground);
+    border: 2px solid var(--foreground);
     padding: 12px 30px;
   }
   .btn-pill-outline:hover {
-    background-color: var(--rui-color-dark);
-    color: var(--rui-color-white);
+    background-color: var(--foreground);
+    color: var(--background);
   }
 
   .btn-pill-ghost-dark {
