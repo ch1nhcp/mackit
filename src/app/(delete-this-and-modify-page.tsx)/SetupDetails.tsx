@@ -1,8 +1,5 @@
-import { Fragment } from 'react';
-
 import Link from 'next/link';
 
-// Define types for the data
 interface Feature {
     name: string;
 }
@@ -12,27 +9,18 @@ interface Plugin {
     githubUrl: string;
 }
 
-// Define constant arrays with types
 const FEATURES: Feature[] = [
     { name: 'Next.js 16' },
     { name: 'React 19' },
     { name: 'Typescript 5' },
     { name: 'Tailwind CSS 4' },
-    {
-        // ! ===================== DISCLAIMER =====================
-        // ! The solution is taken from the community and may not be the best practice, use it at your own jugdement.
-        // ? Ref: https://github.com/vercel/next.js/discussions/49337?sort=top#discussioncomment-5998603
-        // ! ======================================================
-        name: 'ESLint 9'
-    },
-    {
-        name: 'Shadcn UI'
-    },
+    { name: 'ESLint 9' },
+    { name: 'Shadcn UI' },
     { name: 'Prettier 3' },
     { name: 'App Directory' },
-    { name: 'System, Light & Dark Mode' },
-    { name: 'Next Bundle Analyzer' },
-    { name: 'Dockerfile for Node.js 24.12.0 & Bun 1.3.5 (alpine)' }
+    { name: 'Light & Dark Mode' },
+    { name: 'Bundle Analyzer' },
+    { name: 'Dockerfile (Node + Bun)' }
 ];
 
 const ESLINT_PLUGINS: Plugin[] = [
@@ -54,43 +42,55 @@ const PRETTIER_PLUGINS: Plugin[] = [
     }
 ];
 
-// Component with TypeScript
 const SetupDetails: React.FC = () => {
     return (
-        <div>
-            <div>
-                <ol className='flex flex-wrap justify-center gap-3 gap-y-1 sm:gap-y-3'>
-                    {FEATURES.map((feature, index) => (
-                        <Fragment key={feature.name}>
-                            <li>
-                                <h2 className='text-sm sm:text-lg'>{feature.name}</h2>
+        <div className='space-y-10'>
+            <ul className='flex flex-wrap gap-2'>
+                {FEATURES.map((feature) => (
+                    <li
+                        key={feature.name}
+                        className='border-border/70 text-foreground display-nav rounded-full border px-4 py-2 text-base'>
+                        {feature.name}
+                    </li>
+                ))}
+            </ul>
+
+            <div className='border-border/60 grid gap-10 border-t pt-10 md:grid-cols-2'>
+                <div className='space-y-4'>
+                    <h3 className='display-card text-foreground text-2xl'>ESLint plugins</h3>
+                    <ul className='flex flex-wrap gap-x-4 gap-y-2'>
+                        {ESLINT_PLUGINS.map((setup) => (
+                            <li key={setup.name}>
+                                <Link
+                                    href={setup.githubUrl}
+                                    target='_blank'
+                                    rel='noreferrer'
+                                    className='text-muted-foreground hover:text-foreground text-sm transition-colors'>
+                                    {setup.name}
+                                    <span className='ml-1'>↗</span>
+                                </Link>
                             </li>
-                            {index < FEATURES.length - 1 && <span>•</span>}
-                        </Fragment>
-                    ))}
-                </ol>
-            </div>
-            <div className='mt-9 hidden sm:block'>
-                <ul className='flex flex-wrap justify-center gap-x-3 text-xs'>
-                    {ESLINT_PLUGINS.map((setup) => (
-                        <li key={setup.name} className='text-nowrap'>
-                            <Link href={setup.githubUrl} target='_blank' rel='noreferrer'>
-                                {setup.name} <span className='text-blue-500 underline'>↗</span>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-            <div className='mt-9 hidden sm:block'>
-                <ul className='flex flex-wrap justify-center gap-x-3 text-xs'>
-                    {PRETTIER_PLUGINS.map((plugin) => (
-                        <li key={plugin.name}>
-                            <Link href={plugin.githubUrl} target='_blank' rel='noreferrer'>
-                                {plugin.name} <span className='text-blue-500 underline'>↗</span>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
+                        ))}
+                    </ul>
+                </div>
+
+                <div className='space-y-4'>
+                    <h3 className='display-card text-foreground text-2xl'>Prettier plugins</h3>
+                    <ul className='flex flex-wrap gap-x-4 gap-y-2'>
+                        {PRETTIER_PLUGINS.map((plugin) => (
+                            <li key={plugin.name}>
+                                <Link
+                                    href={plugin.githubUrl}
+                                    target='_blank'
+                                    rel='noreferrer'
+                                    className='text-muted-foreground hover:text-foreground text-sm transition-colors'>
+                                    {plugin.name}
+                                    <span className='ml-1'>↗</span>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
         </div>
     );
