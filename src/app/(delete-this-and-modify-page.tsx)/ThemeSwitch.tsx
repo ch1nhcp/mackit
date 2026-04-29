@@ -1,62 +1,44 @@
 'use client';
 
-import { JSX, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useTheme } from 'next-themes';
 
-interface SwitchOption {
-    name: string;
-    value: string;
-    iconSvg: JSX.Element;
-}
-
-// prettier-ignore
-const SWITCH_DATA: SwitchOption[] = [
-    {
-        name: 'System',
-        value: 'system',
-        iconSvg: (<svg xmlns="http://www.w3.org/2000/svg" className="size-4" viewBox="0 0 24 24"><path fill="currentColor" d="M1 2h22v8.25h-2V4H3v12h8.5v2H1zm2 18h8.5v2H3z"></path><path fill="currentColor" d="M19.5 12v1.376c.715.184 1.352.56 1.854 1.072l1.193-.689l1 1.732l-1.192.688a4 4 0 0 1 0 2.142l1.192.688l-1 1.732l-1.193-.689a4 4 0 0 1-1.854 1.072V22.5h-2v-1.376a4 4 0 0 1-1.854-1.072l-1.193.689l-1-1.732l1.192-.688a4 4 0 0 1 0-2.142l-1.192-.688l1-1.732l1.193.688a4 4 0 0 1 1.854-1.071V12zm-2.751 4.283a2 2 0 0 0-.25.967c0 .35.091.68.25.967l.036.063a2 2 0 0 0 3.43 0l.036-.063c.159-.287.249-.616.249-.967c0-.35-.09-.68-.249-.967l-.036-.063a2 2 0 0 0-3.43 0z"></path></svg>),
-    },
-    {
-        name: 'Light',
-        value: 'light',
-        iconSvg: (<svg xmlns="http://www.w3.org/2000/svg" className="size-4" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0-8 0m-5 0h1m8-9v1m8 8h1m-9 8v1M5.6 5.6l.7.7m12.1-.7l-.7.7m0 11.4l.7.7m-12.1-.7l-.7.7"></path></svg>),
-    },
-    {
-        name: 'Dark',
-        value: 'dark',
-        iconSvg: (<svg xmlns="http://www.w3.org/2000/svg" className="size-4" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992z"></path></svg>),
-    },
-];
-
 const ThemeSwitch: React.FC = () => {
-    const { theme, setTheme } = useTheme();
+    const { resolvedTheme, setTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => setMounted(true), []);
 
-    return (
-        <div className='border-border/60 inline-flex items-center rounded-full border p-1'>
-            {SWITCH_DATA.map((data) => {
-                const active = theme === data.value && mounted;
+    const isDark = mounted && resolvedTheme === 'dark';
+    const next = isDark ? 'light' : 'dark';
 
-                return (
-                    <button
-                        key={data.value}
-                        type='button'
-                        aria-label={`${data.name} theme`}
-                        className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs transition-colors ${
-                            active
-                                ? 'bg-foreground text-background'
-                                : 'text-muted-foreground hover:text-foreground'
-                        }`}
-                        onClick={() => setTheme(data.value)}>
-                        {data.iconSvg}
-                        <span className='hidden sm:inline'>{data.name}</span>
-                    </button>
-                );
-            })}
-        </div>
+    return (
+        <button
+            type='button'
+            aria-label={`Switch to ${next} theme`}
+            onClick={() => setTheme(next)}
+            className='text-foreground hover:bg-foreground/5 inline-flex h-9 w-9 items-center justify-center rounded-full transition-colors'>
+            <svg
+                xmlns='http://www.w3.org/2000/svg'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth={1.75}
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                className='size-[18px]'
+                aria-hidden='true'>
+                {isDark ? (
+                    <>
+                        <circle cx='12' cy='12' r='4' />
+                        <path d='M12 3v1.5M12 19.5V21M3 12h1.5M19.5 12H21M5.6 5.6l1.06 1.06M17.34 17.34l1.06 1.06M5.6 18.4l1.06-1.06M17.34 6.66l1.06-1.06' />
+                    </>
+                ) : (
+                    <path d='M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992z' />
+                )}
+            </svg>
+        </button>
     );
 };
 
