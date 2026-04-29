@@ -80,16 +80,21 @@ const ExtensionDetails: React.FC = async () => {
     const extensionDetails = await Promise.all(RECOMMENDED_EXTENSIONS.map(fetchExtensionDetails));
 
     return (
-        <div className='mx-auto grid max-w-2xl grid-cols-6 gap-y-3 sm:grid-cols-10 sm:gap-y-6'>
+        <div className='grid grid-cols-4 gap-3 sm:grid-cols-6 lg:grid-cols-9'>
             {extensionDetails.map((extension) => {
                 return (
-                    <div key={extension.name} className='group relative inline-flex justify-center'>
-                        <Link href={``} target='_blank'>
-                            <img className='size-9 hover:cursor-pointer' src={extension.iconUri} alt={extension.name} />
+                    <div key={extension.name} className='group relative'>
+                        <Link
+                            href={`https://marketplace.visualstudio.com/items?itemName=${extension.name}`}
+                            target='_blank'
+                            className='card-revolut flex aspect-square items-center justify-center !p-4 transition-opacity hover:opacity-85'>
+                            <img className='size-10' src={extension.iconUri} alt={extension.displayName} />
                         </Link>
-                        <div className='absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 transform space-y-1.5 rounded bg-neutral-200 p-3 text-sm whitespace-nowrap text-black group-hover:block'>
-                            <h3 className='text-lg'>{extension.displayName}</h3>
-                            <p>Downloads: {extension.downloadCount.toLocaleString()}</p>
+                        <div className='surface-dark pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 hidden -translate-x-1/2 space-y-1 rounded-2xl px-4 py-3 text-sm whitespace-nowrap group-hover:block'>
+                            <h3 className='display-nav text-base'>{extension.displayName}</h3>
+                            <p className='text-xs text-white/70'>
+                                {extension.downloadCount.toLocaleString()} installs
+                            </p>
                         </div>
                     </div>
                 );
