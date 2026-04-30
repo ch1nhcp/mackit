@@ -6,6 +6,7 @@ import { apps, categories } from '@/lib/catalog';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 
 import { AppCard } from './AppCard';
+import { HomebrewSection } from './HomebrewSection';
 import { InstallDialog } from './InstallDialog';
 import { SelectionBar } from './SelectionBar';
 
@@ -114,8 +115,11 @@ export function MackitHome() {
                 );
             })}
 
+            {/* WHAT IS HOMEBREW */}
+            <HomebrewSection />
+
             {/* HOW IT WORKS */}
-            <section id='how' className='surface-dark mt-16'>
+            <section id='how' className='surface-dark'>
                 <div className='mx-auto w-full max-w-7xl px-6 py-20 sm:py-28 lg:px-10'>
                     <div className='mb-12 flex max-w-3xl flex-col gap-4'>
                         <span className='display-nav text-white/60'>{t.how.eyebrow}</span>

@@ -5,7 +5,6 @@ export type Dict = {
     nav: {
         home: string;
         examples: string;
-        getStarted: string;
     };
     hero: {
         eyebrow: string;
@@ -26,6 +25,15 @@ export type Dict = {
         step1: string;
         step2: string;
         step3: string;
+    };
+    homebrew: {
+        eyebrow: string;
+        title: string;
+        body: string;
+        visitSite: string;
+        readDocs: string;
+        installEyebrow: string;
+        alreadyHave: string;
     };
     selectionBar: {
         appsSelected: (n: number) => string;
@@ -58,7 +66,7 @@ export type Dict = {
 
 const dictionaries: Record<Locale, Dict> = {
     en: {
-        nav: { home: 'Home', examples: 'Examples', getStarted: 'Get started' },
+        nav: { home: 'Home', examples: 'Examples' },
         hero: {
             eyebrow: 'mackit · macOS, batched',
             headline1: 'Install your Mac apps',
@@ -78,6 +86,16 @@ const dictionaries: Record<Locale, Dict> = {
             step1: 'Tick the apps you want from the categories above.',
             step2: 'We generate a single Homebrew command for everything you picked.',
             step3: 'Paste it into Terminal. Brew handles the rest, including its own install if needed.',
+        },
+        homebrew: {
+            eyebrow: 'What is Homebrew?',
+            title: "The package manager macOS forgot to ship.",
+            body: 'Homebrew is a free, open-source tool that installs and updates Mac apps from the command line. mackit just hands brew the list — brew does the work, you stay in control of your machine.',
+            visitSite: 'Visit brew.sh',
+            readDocs: 'Read the docs',
+            installEyebrow: "Don't have it yet? Paste this once:",
+            alreadyHave:
+                "Already have Homebrew? mackit will use what's installed. Otherwise the generated script installs Homebrew first, then your apps.",
         },
         selectionBar: {
             appsSelected: (n) => (n === 1 ? 'app selected' : 'apps selected'),
@@ -107,7 +125,7 @@ const dictionaries: Record<Locale, Dict> = {
         },
     },
     vi: {
-        nav: { home: 'Trang chủ', examples: 'Ví dụ', getStarted: 'Bắt đầu' },
+        nav: { home: 'Trang chủ', examples: 'Ví dụ' },
         hero: {
             eyebrow: 'mackit · macOS, gộp một lần',
             headline1: 'Cài ứng dụng Mac',
@@ -127,6 +145,16 @@ const dictionaries: Record<Locale, Dict> = {
             step1: 'Chọn ứng dụng bạn muốn từ các danh mục bên trên.',
             step2: 'Chúng tôi tạo một lệnh Homebrew cho tất cả các ứng dụng bạn chọn.',
             step3: 'Dán vào Terminal. Brew lo phần còn lại, kể cả việc tự cài Homebrew nếu cần.',
+        },
+        homebrew: {
+            eyebrow: 'Homebrew là gì?',
+            title: 'Trình quản lý gói còn thiếu của macOS.',
+            body: 'Homebrew là công cụ mã nguồn mở, miễn phí, dùng để cài và cập nhật ứng dụng Mac từ dòng lệnh. mackit chỉ đưa danh sách cho brew — brew lo phần còn lại, bạn vẫn nắm quyền kiểm soát máy mình.',
+            visitSite: 'Truy cập brew.sh',
+            readDocs: 'Đọc tài liệu',
+            installEyebrow: 'Chưa có? Dán lệnh này một lần:',
+            alreadyHave:
+                'Đã có Homebrew? mackit sẽ dùng bản hiện có. Nếu chưa có, script đầy đủ sẽ tự cài Homebrew trước rồi mới cài ứng dụng.',
         },
         selectionBar: {
             appsSelected: () => 'ứng dụng đã chọn',
