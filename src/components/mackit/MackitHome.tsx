@@ -3,12 +3,15 @@
 import { useMemo, useState } from 'react';
 
 import { apps, categories } from '@/lib/catalog';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 import { AppCard } from './AppCard';
+import { HomebrewSection } from './HomebrewSection';
 import { InstallDialog } from './InstallDialog';
 import { SelectionBar } from './SelectionBar';
 
 export function MackitHome() {
+    const { t, locale } = useI18n();
     const [selected, setSelected] = useState<Set<string>>(new Set());
     const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -28,22 +31,19 @@ export function MackitHome() {
             {/* HERO */}
             <section className='mx-auto w-full max-w-7xl px-6 pt-16 pb-12 sm:pt-24 lg:px-10 lg:pt-28'>
                 <div className='flex flex-col gap-8'>
-                    <span className='display-nav text-muted-foreground'>mackit · macOS, batched</span>
+                    <span className='display-nav text-muted-foreground'>{t.hero.eyebrow}</span>
                     <h1 className='display-mega text-foreground'>
-                        Install your Mac apps
+                        {t.hero.headline1}
                         <br />
-                        <span className='text-muted-foreground'>in one command.</span>
+                        <span className='text-muted-foreground'>{t.hero.headline2}</span>
                     </h1>
-                    <p className='body-lg text-muted-foreground max-w-2xl'>
-                        Tick the apps you want. We&apos;ll generate a single Homebrew command you paste into
-                        Terminal — no installers, no clicking through wizards, no babysitting.
-                    </p>
+                    <p className='body-lg text-muted-foreground max-w-2xl'>{t.hero.body}</p>
                     <div className='flex flex-wrap items-center gap-3'>
                         <a href='#popular' className='btn-pill btn-pill-primary'>
-                            Browse apps
+                            {t.hero.cta}
                         </a>
                         <a href='#how' className='btn-pill btn-pill-outline'>
-                            How it works
+                            {t.hero.ctaSecondary}
                         </a>
                     </div>
                 </div>
@@ -53,11 +53,11 @@ export function MackitHome() {
             <section id='popular' className='mx-auto w-full max-w-7xl px-6 py-12 lg:px-10'>
                 <div className='mb-8 flex items-end justify-between gap-6'>
                     <div className='flex max-w-2xl flex-col gap-2'>
-                        <span className='display-nav text-muted-foreground'>Popular picks</span>
-                        <h2 className='display-section text-foreground'>The essentials.</h2>
+                        <span className='display-nav text-muted-foreground'>{t.popular.eyebrow}</span>
+                        <h2 className='display-section text-foreground'>{t.popular.title}</h2>
                     </div>
                     <span className='text-muted-foreground hidden text-sm sm:block'>
-                        {popular.length} apps
+                        {popular.length} {t.popular.appsCountSuffix}
                     </span>
                 </div>
                 <div className='grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
@@ -94,11 +94,11 @@ export function MackitHome() {
                                         fontFamily: 'var(--font-manrope), sans-serif',
                                         letterSpacing: '-0.02em',
                                     }}>
-                                    {cat.label}
+                                    {cat.label[locale]}
                                 </h2>
                             </div>
                             <span className='text-muted-foreground hidden text-sm sm:block'>
-                                {list.length} {list.length === 1 ? 'app' : 'apps'}
+                                {list.length} {t.popular.appsCountSuffix}
                             </span>
                         </div>
                         <div className='grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
@@ -115,31 +115,28 @@ export function MackitHome() {
                 );
             })}
 
+            {/* WHAT IS HOMEBREW */}
+            <HomebrewSection />
+
             {/* HOW IT WORKS */}
-            <section id='how' className='surface-dark mt-16'>
+            <section id='how' className='surface-dark'>
                 <div className='mx-auto w-full max-w-7xl px-6 py-20 sm:py-28 lg:px-10'>
                     <div className='mb-12 flex max-w-3xl flex-col gap-4'>
-                        <span className='display-nav text-white/60'>How it works</span>
-                        <h2 className='display-section'>Three steps. No surprises.</h2>
+                        <span className='display-nav text-white/60'>{t.how.eyebrow}</span>
+                        <h2 className='display-section'>{t.how.title}</h2>
                     </div>
                     <div className='grid gap-12 md:grid-cols-3'>
                         <div className='space-y-3'>
                             <p className='display-card'>01</p>
-                            <p className='body-base text-white/70'>
-                                Tick the apps you want from the categories above.
-                            </p>
+                            <p className='body-base text-white/70'>{t.how.step1}</p>
                         </div>
                         <div className='space-y-3'>
                             <p className='display-card'>02</p>
-                            <p className='body-base text-white/70'>
-                                We generate a single Homebrew command for everything you picked.
-                            </p>
+                            <p className='body-base text-white/70'>{t.how.step2}</p>
                         </div>
                         <div className='space-y-3'>
                             <p className='display-card'>03</p>
-                            <p className='body-base text-white/70'>
-                                Paste it into Terminal. Brew handles the rest, including its own install if needed.
-                            </p>
+                            <p className='body-base text-white/70'>{t.how.step3}</p>
                         </div>
                     </div>
                 </div>

@@ -3,17 +3,20 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const NAVIGATION_LINKS = [
-    { href: '/', label: 'Home' },
-    { href: '/examples', label: 'Examples' }
-];
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 const NavigationLinks = () => {
     const pathname = usePathname();
+    const { t } = useI18n();
+
+    const links = [
+        { href: '/', label: t.nav.home },
+        { href: '/examples', label: t.nav.examples },
+    ];
 
     return (
         <nav className='hidden items-center gap-2 sm:flex'>
-            {NAVIGATION_LINKS.map((link) => {
+            {links.map((link) => {
                 const active = link.href === '/' ? pathname === link.href : pathname.includes(link.href);
 
                 return (

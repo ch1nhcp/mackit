@@ -4,19 +4,23 @@ import { useEffect, useState } from 'react';
 
 import { useTheme } from 'next-themes';
 
+import { useI18n } from '@/lib/i18n/I18nProvider';
+
 const ThemeSwitch: React.FC = () => {
     const { resolvedTheme, setTheme } = useTheme();
+    const { t } = useI18n();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => setMounted(true), []);
 
     const isDark = mounted && resolvedTheme === 'dark';
     const next = isDark ? 'light' : 'dark';
+    const label = isDark ? t.theme.switchToLight : t.theme.switchToDark;
 
     return (
         <button
             type='button'
-            aria-label={`Switch to ${next} theme`}
+            aria-label={label}
             onClick={() => setTheme(next)}
             className='text-foreground hover:bg-foreground/5 inline-flex h-9 w-9 items-center justify-center rounded-full transition-colors'>
             <svg

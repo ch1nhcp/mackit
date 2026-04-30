@@ -303,14 +303,24 @@
     color: var(--rui-color-dark);
   }
 
-  /* --- Surfaces --- */
+  /* --- Surfaces ---
+   * surface-* lock the contrast pair for descendants so theme-aware pill
+   * buttons (which read --foreground / --background) keep correct contrast
+   * regardless of the global light/dark mode.
+   */
   .surface-dark {
     background-color: var(--rui-color-dark);
     color: var(--rui-color-white);
+    --foreground: var(--rui-color-white);
+    --background: var(--rui-color-dark);
+    --muted-foreground: rgba(244, 244, 244, 0.7);
   }
   .surface-light {
     background-color: var(--rui-color-light-surface);
     color: var(--rui-color-dark);
+    --foreground: var(--rui-color-dark);
+    --background: var(--rui-color-white);
+    --muted-foreground: var(--rui-color-mid-slate);
   }
 
   /* Cards: 20px radius, no shadow — depth via color contrast only */

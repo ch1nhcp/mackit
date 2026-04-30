@@ -1,7 +1,10 @@
+'use client';
+
 import Link from 'next/link';
 
 import NavigationLinks from '@/app/(delete-this-and-modify-page.tsx)/NavigationLinks';
 import ThemeSwitch from '@/app/(delete-this-and-modify-page.tsx)/ThemeSwitch';
+import { LocaleSwitcher } from '@/components/mackit/LocaleSwitcher';
 
 const NavigationBar = () => {
     return (
@@ -24,14 +27,9 @@ const NavigationBar = () => {
                     </Link>
                     <NavigationLinks />
                 </div>
-                <div className='flex w-full items-center justify-between gap-4 sm:w-auto'>
+                <div className='flex w-full items-center justify-between gap-3 sm:w-auto'>
+                    <LocaleSwitcher />
                     <ThemeSwitch />
-                    <Link
-                        href='https://github.com/SiddharthaMaity/nextjs-16-starter-shadcn'
-                        target='_blank'
-                        className='btn-pill btn-pill-primary'>
-                        Get started
-                    </Link>
                 </div>
             </div>
         </header>

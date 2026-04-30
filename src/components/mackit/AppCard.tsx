@@ -1,6 +1,7 @@
 'use client';
 
 import type { App } from '@/lib/catalog';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 import { AppIcon } from './AppIcon';
 
@@ -11,6 +12,7 @@ type Props = {
 };
 
 export function AppCard({ app, selected, onToggle }: Props) {
+    const { locale } = useI18n();
     return (
         <button
             type='button'
@@ -57,7 +59,7 @@ export function AppCard({ app, selected, onToggle }: Props) {
                         'text-sm leading-snug',
                         selected ? 'text-background/70' : 'text-muted-foreground',
                     ].join(' ')}>
-                    {app.description}
+                    {app.description[locale]}
                 </span>
             </div>
         </button>
