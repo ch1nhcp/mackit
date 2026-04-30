@@ -34,6 +34,16 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         document.documentElement.lang = locale;
+        const dict = getDict(locale);
+        document.title = dict.meta.title;
+        const desc = document.querySelector('meta[name="description"]');
+        if (desc) desc.setAttribute('content', dict.meta.description);
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) ogTitle.setAttribute('content', dict.meta.title);
+        const ogDesc = document.querySelector('meta[property="og:description"]');
+        if (ogDesc) ogDesc.setAttribute('content', dict.meta.description);
+        const ogLocale = document.querySelector('meta[property="og:locale"]');
+        if (ogLocale) ogLocale.setAttribute('content', locale === 'vi' ? 'vi_VN' : 'en_US');
     }, [locale]);
 
     const setLocale = (next: Locale) => {

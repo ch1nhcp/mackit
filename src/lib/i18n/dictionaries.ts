@@ -62,6 +62,10 @@ export type Dict = {
         license: string;
         rights: (year: number) => string;
     };
+    meta: {
+        title: string;
+        description: string;
+    };
 };
 
 const dictionaries: Record<Locale, Dict> = {
@@ -123,6 +127,11 @@ const dictionaries: Record<Locale, Dict> = {
             license: 'MIT License',
             rights: (year) => `© ${year} mackit`,
         },
+        meta: {
+            title: 'mackit — install macOS apps in one command',
+            description:
+                'Pick your Mac apps and mackit generates a single Homebrew command you paste into Terminal.',
+        },
     },
     vi: {
         nav: { home: 'Trang chủ', examples: 'Ví dụ' },
@@ -180,6 +189,11 @@ const dictionaries: Record<Locale, Dict> = {
             sourceCode: 'Mã nguồn',
             license: 'Giấy phép MIT',
             rights: (year) => `© ${year} mackit`,
+        },
+        meta: {
+            title: 'mackit — cài ứng dụng macOS bằng một lệnh',
+            description:
+                'Chọn ứng dụng Mac, mackit tạo lệnh Homebrew duy nhất để bạn dán vào Terminal.',
         },
     },
 };
