@@ -1,3 +1,5 @@
+import type { Locale } from '@/lib/i18n/dictionaries';
+
 export type CategoryId =
     | 'browsers'
     | 'communication'
@@ -7,40 +9,41 @@ export type CategoryId =
     | 'utilities'
     | 'creative';
 
+export type Localized = Record<Locale, string>;
+
 export type App = {
     id: string;
     name: string;
     type: 'cask' | 'formula';
     category: CategoryId;
-    description: string;
+    description: Localized;
     homepage: string;
     popular?: boolean;
 };
 
 export type Category = {
     id: CategoryId;
-    label: string;
+    label: Localized;
     accent: string; // background tint for category, kept muted to honor the marketing palette
 };
 
 export const categories: Category[] = [
-    { id: 'browsers', label: 'Browsers', accent: '#eef0ff' },
-    { id: 'communication', label: 'Communication', accent: '#fde8ee' },
-    { id: 'productivity', label: 'Productivity', accent: '#e7f5ee' },
-    { id: 'media', label: 'Media', accent: '#fff1de' },
-    { id: 'developer', label: 'Developer', accent: '#e8f1f7' },
-    { id: 'utilities', label: 'Utilities', accent: '#f1f0eb' },
-    { id: 'creative', label: 'Creative', accent: '#f5e9e6' },
+    { id: 'browsers', label: { en: 'Browsers', vi: 'Trình duyệt' }, accent: '#eef0ff' },
+    { id: 'communication', label: { en: 'Communication', vi: 'Liên lạc' }, accent: '#fde8ee' },
+    { id: 'productivity', label: { en: 'Productivity', vi: 'Năng suất' }, accent: '#e7f5ee' },
+    { id: 'media', label: { en: 'Media', vi: 'Đa phương tiện' }, accent: '#fff1de' },
+    { id: 'developer', label: { en: 'Developer', vi: 'Nhà phát triển' }, accent: '#e8f1f7' },
+    { id: 'utilities', label: { en: 'Utilities', vi: 'Tiện ích' }, accent: '#f1f0eb' },
+    { id: 'creative', label: { en: 'Creative', vi: 'Sáng tạo' }, accent: '#f5e9e6' },
 ];
 
 export const apps: App[] = [
-    // Browsers
     {
         id: 'google-chrome',
         name: 'Google Chrome',
         type: 'cask',
         category: 'browsers',
-        description: 'Web browser',
+        description: { en: 'Web browser', vi: 'Trình duyệt web' },
         homepage: 'https://google.com/chrome',
         popular: true,
     },
@@ -49,7 +52,7 @@ export const apps: App[] = [
         name: 'Firefox',
         type: 'cask',
         category: 'browsers',
-        description: 'Open-source browser',
+        description: { en: 'Open-source browser', vi: 'Trình duyệt mã nguồn mở' },
         homepage: 'https://firefox.com',
         popular: true,
     },
@@ -58,7 +61,10 @@ export const apps: App[] = [
         name: 'Arc',
         type: 'cask',
         category: 'browsers',
-        description: 'Browser from The Browser Company',
+        description: {
+            en: 'Browser from The Browser Company',
+            vi: 'Trình duyệt từ The Browser Company',
+        },
         homepage: 'https://arc.net',
     },
     {
@@ -66,16 +72,15 @@ export const apps: App[] = [
         name: 'Brave',
         type: 'cask',
         category: 'browsers',
-        description: 'Privacy-first browser',
+        description: { en: 'Privacy-first browser', vi: 'Trình duyệt tập trung quyền riêng tư' },
         homepage: 'https://brave.com',
     },
-    // Communication
     {
         id: 'slack',
         name: 'Slack',
         type: 'cask',
         category: 'communication',
-        description: 'Team messaging',
+        description: { en: 'Team messaging', vi: 'Nhắn tin nhóm' },
         homepage: 'https://slack.com',
         popular: true,
     },
@@ -84,7 +89,7 @@ export const apps: App[] = [
         name: 'Discord',
         type: 'cask',
         category: 'communication',
-        description: 'Voice & text chat',
+        description: { en: 'Voice & text chat', vi: 'Trò chuyện thoại & văn bản' },
         homepage: 'https://discord.com',
     },
     {
@@ -92,17 +97,16 @@ export const apps: App[] = [
         name: 'Zoom',
         type: 'cask',
         category: 'communication',
-        description: 'Video conferencing',
+        description: { en: 'Video conferencing', vi: 'Họp video' },
         homepage: 'https://zoom.us',
         popular: true,
     },
-    // Productivity
     {
         id: 'notion',
         name: 'Notion',
         type: 'cask',
         category: 'productivity',
-        description: 'Notes & docs',
+        description: { en: 'Notes & docs', vi: 'Ghi chú & tài liệu' },
         homepage: 'https://notion.so',
         popular: true,
     },
@@ -111,7 +115,7 @@ export const apps: App[] = [
         name: 'Obsidian',
         type: 'cask',
         category: 'productivity',
-        description: 'Markdown knowledge base',
+        description: { en: 'Markdown knowledge base', vi: 'Cơ sở tri thức Markdown' },
         homepage: 'https://obsidian.md',
     },
     {
@@ -119,7 +123,7 @@ export const apps: App[] = [
         name: 'Raycast',
         type: 'cask',
         category: 'productivity',
-        description: 'Spotlight on steroids',
+        description: { en: 'Spotlight on steroids', vi: 'Spotlight nâng cấp' },
         homepage: 'https://raycast.com',
         popular: true,
     },
@@ -128,16 +132,15 @@ export const apps: App[] = [
         name: '1Password',
         type: 'cask',
         category: 'productivity',
-        description: 'Password manager',
+        description: { en: 'Password manager', vi: 'Trình quản lý mật khẩu' },
         homepage: 'https://1password.com',
     },
-    // Media
     {
         id: 'spotify',
         name: 'Spotify',
         type: 'cask',
         category: 'media',
-        description: 'Music streaming',
+        description: { en: 'Music streaming', vi: 'Nghe nhạc trực tuyến' },
         homepage: 'https://spotify.com',
         popular: true,
     },
@@ -146,16 +149,15 @@ export const apps: App[] = [
         name: 'VLC',
         type: 'cask',
         category: 'media',
-        description: 'Plays anything',
+        description: { en: 'Plays anything', vi: 'Phát mọi định dạng' },
         homepage: 'https://videolan.org',
     },
-    // Developer
     {
         id: 'visual-studio-code',
         name: 'VS Code',
         type: 'cask',
         category: 'developer',
-        description: 'Code editor',
+        description: { en: 'Code editor', vi: 'Trình soạn mã' },
         homepage: 'https://code.visualstudio.com',
         popular: true,
     },
@@ -164,7 +166,7 @@ export const apps: App[] = [
         name: 'iTerm2',
         type: 'cask',
         category: 'developer',
-        description: 'Terminal replacement',
+        description: { en: 'Terminal replacement', vi: 'Thay thế Terminal' },
         homepage: 'https://iterm2.com',
     },
     {
@@ -172,7 +174,7 @@ export const apps: App[] = [
         name: 'Docker',
         type: 'cask',
         category: 'developer',
-        description: 'Containers desktop',
+        description: { en: 'Containers desktop', vi: 'Docker container' },
         homepage: 'https://docker.com',
     },
     {
@@ -180,16 +182,15 @@ export const apps: App[] = [
         name: 'GitHub CLI',
         type: 'formula',
         category: 'developer',
-        description: 'GitHub from the terminal',
+        description: { en: 'GitHub from the terminal', vi: 'GitHub từ terminal' },
         homepage: 'https://cli.github.com',
     },
-    // Utilities
     {
         id: 'rectangle',
         name: 'Rectangle',
         type: 'cask',
         category: 'utilities',
-        description: 'Window manager',
+        description: { en: 'Window manager', vi: 'Quản lý cửa sổ' },
         homepage: 'https://rectangleapp.com',
         popular: true,
     },
@@ -198,16 +199,15 @@ export const apps: App[] = [
         name: 'The Unarchiver',
         type: 'cask',
         category: 'utilities',
-        description: 'Open every archive',
+        description: { en: 'Open every archive', vi: 'Mở mọi định dạng nén' },
         homepage: 'https://theunarchiver.com',
     },
-    // Creative
     {
         id: 'figma',
         name: 'Figma',
         type: 'cask',
         category: 'creative',
-        description: 'Design & prototyping',
+        description: { en: 'Design & prototyping', vi: 'Thiết kế & dựng mẫu' },
         homepage: 'https://figma.com',
         popular: true,
     },

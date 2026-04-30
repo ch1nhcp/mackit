@@ -1,5 +1,7 @@
 'use client';
 
+import { useI18n } from '@/lib/i18n/I18nProvider';
+
 type Props = {
     count: number;
     onClear: () => void;
@@ -7,6 +9,7 @@ type Props = {
 };
 
 export function SelectionBar({ count, onClear, onGenerate }: Props) {
+    const { t } = useI18n();
     if (count === 0) return null;
     return (
         <div className='pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-4 pb-6'>
@@ -18,7 +21,7 @@ export function SelectionBar({ count, onClear, onGenerate }: Props) {
                         {count}
                     </span>
                     <span className='text-sm text-white/80 sm:text-base'>
-                        {count === 1 ? 'app selected' : 'apps selected'}
+                        {t.selectionBar.appsSelected(count)}
                     </span>
                 </div>
                 <div className='flex items-center gap-2'>
@@ -26,14 +29,14 @@ export function SelectionBar({ count, onClear, onGenerate }: Props) {
                         type='button'
                         onClick={onClear}
                         className='hidden rounded-full px-4 py-2 text-sm text-white/70 transition hover:text-white sm:inline-flex'>
-                        Clear
+                        {t.selectionBar.clear}
                     </button>
                     <button
                         type='button'
                         onClick={onGenerate}
                         className='inline-flex items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[#191c1f] transition hover:opacity-85 sm:px-6 sm:py-3 sm:text-base'
                         style={{ fontFamily: 'var(--font-manrope), sans-serif' }}>
-                        Get install command
+                        {t.selectionBar.getInstall}
                     </button>
                 </div>
             </div>

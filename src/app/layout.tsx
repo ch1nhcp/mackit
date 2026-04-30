@@ -8,6 +8,8 @@ import { ThemeProvider } from 'next-themes';
 
 import NavigationBar from '@/app/(delete-this-and-modify-page.tsx)/NavigationBar';
 import '@/app/globals.css';
+import { Footer } from '@/components/mackit/Footer';
+import { I18nProvider } from '@/lib/i18n/I18nProvider';
 import { Toaster } from '@/registry/new-york-v4/ui/sonner';
 
 const inter = Inter({
@@ -40,9 +42,12 @@ const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
             <body
                 className={`${inter.variable} ${manrope.variable} ${geistMono.variable} bg-background text-foreground overscroll-none antialiased`}>
                 <ThemeProvider attribute='class'>
-                    <NavigationBar />
-                    {children}
-                    <Toaster />
+                    <I18nProvider>
+                        <NavigationBar />
+                        {children}
+                        <Footer />
+                        <Toaster />
+                    </I18nProvider>
                 </ThemeProvider>
             </body>
         </html>
