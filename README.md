@@ -1,7 +1,7 @@
 # mackit
 
-Ninite for macOS. Tick the apps you want, paste the generated `brew install`
-command into Terminal, walk away.
+A batch installer for macOS apps, powered by Homebrew. Tick the apps you want,
+paste the generated `brew install` command into Terminal, walk away.
 
 mackit doesn't execute anything on your machine — it builds a transparent shell
 script you can read and run yourself. No daemons, no installers, no accounts.
